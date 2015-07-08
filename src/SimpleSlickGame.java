@@ -12,7 +12,8 @@ import org.newdawn.slick.Image;
 
 public class SimpleSlickGame extends BasicGame
 {
-	private Image background;
+	private Background bg;
+	
 	private Image turtle;
 	private Image seaweed;
 	private double tx;
@@ -23,11 +24,13 @@ public class SimpleSlickGame extends BasicGame
 	public SimpleSlickGame(String gamename)
 	{
 		super(gamename);
+		bg=new Background();
+		
 	}
 
 	@Override
 	public void init(GameContainer gc) throws SlickException {
-		background = new Image("/Users/kitchen/Desktop/water_bg.jpg");
+		bg.init(gc);
 		turtle = new Image("/Users/kitchen/Desktop/turtle2.png");
 		seaweed = new Image("/Users/kitchen/Desktop/seaweed.png");
 		tx = 100;
@@ -75,14 +78,14 @@ public class SimpleSlickGame extends BasicGame
 		tx += dtx;
 		ty += dty;
 		
-	
+		bg.update(gc, delta);
 	}
 
 	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException
 	{
 //		float scale = 0.6f;
-		background.draw(0, 0, 1.0f);
+		bg.render(gc, g);
 		turtle.draw((int) tx, (int) ty);
 		seaweed.draw(100f,600f);
 		
